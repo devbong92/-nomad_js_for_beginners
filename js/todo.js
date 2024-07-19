@@ -18,25 +18,58 @@ function deleteToDo(event) {
 }
 
 function paintToDo(newTodo) {
-  const li = document.createElement("li");
-  li.id = newTodo.id;
-  const span = document.createElement("span");
-  span.innerText = newTodo.text;
-  const button = document.createElement("button");
-  button.innerText = "❌";
-  button.addEventListener("click", deleteToDo);
-  li.appendChild(span);
-  li.appendChild(button);
-  toDoList.appendChild(li);
+    
+    const li = document.createElement("li");
+    li.id = newTodo.id;
+
+    const item = document.createElement("div");
+
+    const check = document.createElement("input");
+    check.type = 'checkbox';
+    check.value = li.id;
+    if(newTodo.checked === 'checked') check.checked = true;
+    
+    const span = document.createElement("span");
+    span.innerText = newTodo.text;
+    if(newTodo.checked === 'checked') span.style.textDecoration='line-through'
+
+    const button = document.createElement("span");
+    button.innerText = "❌";
+    button.className = "toDo__button";
+    button.addEventListener("click", deleteToDo);
+    
+    item.appendChild(check);
+    item.appendChild(span);
+    item.appendChild(button);
+    li.appendChild(item);
+    toDoList.appendChild(li);
+
+    check.addEventListener('change', (event) =>{ 
+        let isCheck = event.currentTarget.checked ? "checked" : "";
+        let checkTodo = toDos.filter((toDo) => toDo.id === parseInt(event.currentTarget.value));
+        checkTodo[0].checked = isCheck;
+        saveToDos();
+
+        if (event.currentTarget.checked)
+        {
+            span.style.textDecoration='line-through'
+        }
+        else {
+            span.style.textDecoration='none'
+        }
+    });
+
 }
 
 function handleToDoSubmit(event) {
   event.preventDefault();
+  
   const newTodo = toDoInput.value;
   toDoInput.value = "";
   const newTodoObj = {
     text: newTodo,
     id: Date.now(),
+    checked: ""
   };
   toDos.push(newTodoObj);
   paintToDo(newTodoObj);

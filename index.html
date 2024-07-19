@@ -9,20 +9,39 @@
 </head>
 
 <body>
-    <form class="hidden" id="login-form">
-        <input required maxlength="15" type="text" placeholder="What is your name?" />
-        <input type="submit" value="Log In" />
-    </form>
-    <h2 id="clock">00:00:00</h2>
-    <h1 class="hidden" id="greeting"></h1>
-    <form id="todo-form">
-        <input type="text" placeholder="Write a To Do and Press Enter" required />
-    </form>
-    <ul id="todo-list"></ul>
-    <div id="quote">
-        <span></span>
-        <span></span>
-    </div>
+    <section class="center">
+        <div id="weather">
+            <span></span>
+            <span></span>
+        </div>
+        <div id="quote">
+            <span></span>
+            <span></span>
+        </div>
+        
+        <div class="js-clock clock">
+            <h3 id="clock" class="clock__text">00:00</h3>
+        </div>
+        <div class="js-name name">
+            <form class="hidden" id="login-form">
+                <input required maxlength="15" type="text" placeholder="What is your name?" />
+                <input type="submit" value="Log In" />
+            </form>
+        </div>
+        <h1 class="hidden" id="greeting"></h1>
+        <div>
+            <form id="todo-form" class="js-to-do to-do">
+                <input class="js-add-to-do to-do__add-to-do" placeholder="Write a To Do here" type="text" required/>
+            </form>
+            <ul id="todo-list" class="js-list list"></ul>
+        </div>
+        
+    </section>
+    
+    
+    
+    
+    <script src="./secret.js"></script>
     <script src="js/greetings.js"></script>
     <script src="js/clocks.js"></script>
     <script src="js/quotes.js"></script>
